@@ -1,11 +1,14 @@
 package br.com.casadocodigo.loja.models;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public class Book {
@@ -17,6 +20,13 @@ public class Book {
 	private String description;
 	private int numberOfPages;
 	private BigDecimal price;
+	
+	@Transient
+	private List<Author> authors = new ArrayList<>();
+	
+	public void add(Author author) {
+		authors.add(author);
+	}
 	
 	public Integer getId() {
 		return id;
@@ -56,6 +66,14 @@ public class Book {
 	
 	public void setPrice(BigDecimal price) {
 		this.price = price;
+	}
+	
+	public List<Author> getAuthors() {
+		return authors;
+	}
+	
+	public void setAuthors(List<Author> authors) {
+		this.authors = authors;
 	}
 
 	@Override
